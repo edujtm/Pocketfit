@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_exercises"
+        android:icon="@drawable/ic_muscle_24dp"
+        android:title="@string/title_exercises" />
+
+    <item
+        android:id="@+id/navigation_last_workouts"
+        android:icon="@drawable/ic_calendar_month_24"
+        android:title="@string/title_last_workouts" />
+
+    <item
+        android:id="@+id/navigation_progress"
+        android:icon="@drawable/ic_show_chart_24"
+        android:title="@string/title_progress" />
+
+</menu>

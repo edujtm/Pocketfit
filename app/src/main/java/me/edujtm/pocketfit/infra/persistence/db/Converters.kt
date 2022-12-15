@@ -1,4 +1,4 @@
-package me.edujtm.pocketfit.infra.persistence
+package me.edujtm.pocketfit.infra.persistence.db
 
 import androidx.room.TypeConverter
 import java.util.Date

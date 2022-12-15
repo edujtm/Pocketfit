@@ -5,7 +5,9 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import me.edujtm.pocketfit.di.qualifier.AppContext
-import me.edujtm.pocketfit.infra.persistence.PocketFitDatabase
+import me.edujtm.pocketfit.infra.persistence.dao.ExerciseDao
+import me.edujtm.pocketfit.infra.persistence.dao.WorkoutDao
+import me.edujtm.pocketfit.infra.persistence.db.PocketFitDatabase
 import javax.inject.Singleton
 
 @Module
@@ -18,6 +20,20 @@ object PersistenceModule {
             context,
             PocketFitDatabase::class.java,
             "Pocketfit.db"
-        ).build()
+        )
+        .createFromAsset("database/prepopulate-exercises.db")
+        .build()
+    }
+
+    @JvmStatic
+    @Provides @Singleton
+    fun provideExerciseDao(database: PocketFitDatabase): ExerciseDao {
+        return database.exerciseDao()
+    }
+
+    @JvmStatic
+    @Provides @Singleton
+    fun provideWorkoutDao(database: PocketFitDatabase): WorkoutDao {
+        return database.workoutDao()
     }
 }

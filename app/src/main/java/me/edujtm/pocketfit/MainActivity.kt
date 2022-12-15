@@ -8,8 +8,15 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import me.edujtm.pocketfit.databinding.ActivityMainBinding
+import me.edujtm.pocketfit.di.components.MainActivityComponent
+import me.edujtm.pocketfit.di.components.MainActivityComponentProvider
+import me.edujtm.pocketfit.platform.injector
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainActivityComponentProvider {
+
+    override val activityInjector: MainActivityComponent by lazy {
+        injector.mainActivityInjector.create()
+    }
 
     private lateinit var binding: ActivityMainBinding
 

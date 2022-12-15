@@ -7,5 +7,5 @@ import me.edujtm.pocketfit.infra.persistence.models.ExerciseDB
 @Dao
 interface ExerciseDao {
     @Query("SELECT * FROM exercises")
-    fun getExercises(): List<ExerciseDB>
+    suspend fun getExercises(): List<ExerciseDB>
 }

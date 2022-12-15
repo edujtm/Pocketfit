@@ -9,6 +9,6 @@ class PocketFitApp : Application(), ComponentProvider {
     override val component: AppComponent by lazy {
         DaggerAppComponent
             .factory()
-            .create()
+            .create(appContext = this)
     }
 }

@@ -6,10 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import me.edujtm.pocketfit.databinding.FragmentExercisesBinding
+import me.edujtm.pocketfit.platform.mainActivityInjector
+import me.edujtm.pocketfit.platform.viewModel
 
 class ExercisesFragment : Fragment() {
+
+    private val exercisesViewModel: ExercisesViewModel by viewModel {
+        mainActivityInjector.exercisesViewModel
+    }
 
     private var _binding: FragmentExercisesBinding? = null
 
@@ -22,14 +27,13 @@ class ExercisesFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val homeViewModel =
-            ViewModelProvider(this).get(ExercisesViewModel::class.java)
-
         _binding = FragmentExercisesBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
+        exercisesViewModel.fetchExercises();
+
         val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
+        exercisesViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root

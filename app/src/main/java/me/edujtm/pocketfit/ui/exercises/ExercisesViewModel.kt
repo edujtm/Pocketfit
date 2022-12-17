@@ -5,25 +5,25 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.*
+import me.edujtm.pocketfit.domain.entities.Exercise
 import me.edujtm.pocketfit.infra.persistence.dao.ExerciseDao
 import javax.inject.Inject
-import kotlin.coroutines.CoroutineContext
 
 class ExercisesViewModel
     @Inject constructor(
         private val exercisesDao: ExerciseDao
     ) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "Loading..."
+    private val _exercises = MutableLiveData<List<Exercise>>().apply {
+        value = listOf()
     }
-    val text: LiveData<String> = _text
+    val exercise: LiveData<List<Exercise>> = _exercises
 
     fun fetchExercises() = viewModelScope.launch {
         val exercises = withContext(Dispatchers.IO) {
             exercisesDao.getExercises()
         }
 
-        _text.value = exercises.joinToString { it.name }
+        _exercises.value = exercises.map { dbItem -> Exercise.fromDB(dbItem) }
     }
 }

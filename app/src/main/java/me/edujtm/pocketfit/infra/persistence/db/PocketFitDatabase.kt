@@ -5,15 +5,15 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import me.edujtm.pocketfit.infra.persistence.dao.ExerciseDao
 import me.edujtm.pocketfit.infra.persistence.dao.WorkoutDao
-import me.edujtm.pocketfit.infra.persistence.models.ExerciseDB
-import me.edujtm.pocketfit.infra.persistence.models.RepetitionDB
-import me.edujtm.pocketfit.infra.persistence.models.WorkoutDB
+import me.edujtm.pocketfit.infra.persistence.models.*
 
 @Database(
     entities = [
         WorkoutDB::class,
         ExerciseDB::class,
-        RepetitionDB::class
+        RepetitionDB::class,
+        MuscleDB::class,
+        WorkedMuscles::class,
     ],
     version = 1,
     exportSchema = false,

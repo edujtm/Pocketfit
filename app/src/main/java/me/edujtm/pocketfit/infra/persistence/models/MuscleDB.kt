@@ -2,11 +2,10 @@ package me.edujtm.pocketfit.infra.persistence.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import java.util.*
 
-@Entity(tableName = "workouts")
-data class WorkoutDB(
+@Entity(tableName = "muscles")
+data class MuscleDB(
     @PrimaryKey
-    val workoutId: Int,
-    val date: Date?,
+    val muscleId: Int,
+    val name: String,
 )

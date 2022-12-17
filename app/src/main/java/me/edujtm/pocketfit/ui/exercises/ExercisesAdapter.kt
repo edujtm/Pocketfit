@@ -1,5 +1,6 @@
 package me.edujtm.pocketfit.ui.exercises
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,6 +40,8 @@ class ExercisesAdapter
             exerciseItem = item
 
             binding.exerciseItemName.text = item.name
+            Log.i("ExercisesAdapter", "Muscles ${item.workedMuscles.joinToString { it.name }}")
+            binding.exerciseWorkedMuscles.text = item.workedMuscles.joinToString { it.name }
         }
     }
 }

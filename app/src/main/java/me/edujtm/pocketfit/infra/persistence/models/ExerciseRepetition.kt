@@ -6,6 +6,6 @@ import androidx.room.Relation
 data class ExerciseRepetition(
     @Embedded
     val repetition: RepetitionDB,
-    @Relation(parentColumn = "exerciseId", entityColumn = "id")
+    @Relation(parentColumn = "exerciseId", entityColumn = "exerciseId")
     val exercise: ExerciseDB,
 )

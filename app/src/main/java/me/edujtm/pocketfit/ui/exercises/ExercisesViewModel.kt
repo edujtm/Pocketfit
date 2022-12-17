@@ -21,7 +21,7 @@ class ExercisesViewModel
 
     fun fetchExercises() = viewModelScope.launch {
         val exercises = withContext(Dispatchers.IO) {
-            exercisesDao.getExercises()
+            exercisesDao.getExercisesWithMuscles()
         }
 
         _exercises.value = exercises.map { dbItem -> Exercise.fromDB(dbItem) }

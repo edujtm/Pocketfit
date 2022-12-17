@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "repetitions")
 data class RepetitionDB(
     @PrimaryKey
-    val id: Int,
+    val repetitionId: Int,
     val quantity: Int,
     val weight: Int,
     val workoutId: Int,  // Workout FK

@@ -1,13 +1,14 @@
 package me.edujtm.pocketfit.platform
 
 import android.app.Activity
+import android.content.Intent
+import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import me.edujtm.pocketfit.di.components.ComponentProvider
 import me.edujtm.pocketfit.di.components.MainActivityComponentProvider
 
@@ -33,6 +34,35 @@ inline fun <reified T : ViewModel> FragmentActivity.viewModel(
 }
 
 /**
+ * Allows for instantiation of a [ViewModel] object that will survive
+ * system-initiated process death by allowing the user to inject a
+ * [SavedStateHandle] when using the [provider] factory function to
+ * instantiate the viewmodel.
+ *
+ * This methods abstracts the implementation of the necessary subclass of
+ * [AbstractSavedStateViewModelFactory] that will handle the [ViewModel]
+ * and [SavedStateHandle] lifecycles.
+ *
+ * @sample
+ * class SomeActivity : Activity {
+ *    private val viewModel: MyViewModel by savedStateViewModel { handle -> MyViewModel(handle) }
+ * }
+ */
+inline fun <reified T: ViewModel> AppCompatActivity.savedStateViewModel(
+    bundle: Bundle? = null,
+    crossinline provider: (SavedStateHandle) -> T
+) = viewModels<T> {
+    object : AbstractSavedStateViewModelFactory(this, bundle) {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(
+            key: String,
+            modelClass: Class<T>,
+            handle: SavedStateHandle
+        ): T = provider(handle) as T
+    }
+}
+
+/**
  * Abstracts the instantiation of a ViewModel that is scoped to a Fragment
  * while delegating lifecycle management to [ViewModelProvider].
  *
@@ -47,6 +77,31 @@ inline fun <reified T : ViewModel> Fragment.viewModel(
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T = provider() as T
     }
+}
+
+inline fun <reified T : ViewModel> Fragment.savedStateViewModel(
+    bundle: Bundle? = null,
+    crossinline provider: (SavedStateHandle) -> T
+) = viewModels<T> {
+    object : AbstractSavedStateViewModelFactory(this, bundle) {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel> create(
+            key: String,
+            modelClass: Class<T>,
+            handle: SavedStateHandle
+        ): T = provider(handle) as T
+    }
+}
+
+/**
+ * Starts an explicit intent. Extra information can be added by using [intentAddons].
+ *
+ * @param intentAddons lambda function that allows to apply modifications to the intent.
+ */
+inline fun <reified T : Activity> Activity.startActivity(noinline intentAddons: ((Intent) -> Unit)? = null) {
+    val intent = Intent(this, T::class.java)
+    intentAddons?.let { intent.apply(it) }
+    startActivity(intent)
 }
 
 /**

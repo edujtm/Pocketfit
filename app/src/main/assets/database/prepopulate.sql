@@ -16,15 +16,9 @@ CREATE TABLE IF NOT EXISTS workouts(
     date INTEGER
 );
 
--- TODO: Add major group later
--- Chest
--- Back
--- Arms
--- Abdominals
--- Legs
--- Shoulders
 CREATE TABLE IF NOT EXISTS muscles(
     muscleId INTEGER NOT NULL PRIMARY KEY,
+    majorGroup TEXT NOT NULL,
     name TEXT NOT NULL
 );
 
@@ -39,16 +33,16 @@ INSERT INTO exercises VALUES (2, "Single Arm French Press");
 INSERT INTO exercises VALUES (3, "Bench Press");
 INSERT INTO exercises VALUES (4, "Peck Deck");
 
-INSERT INTO muscles VALUES (1, "Calves");
-INSERT INTO muscles VALUES (2, "Hamstrings");
-INSERT INTO muscles VALUES (3, "Quadriceps");
-INSERT INTO muscles VALUES (4, "Glutes");
-INSERT INTO muscles VALUES (5, "Biceps");
-INSERT INTO muscles VALUES (6, "Triceps");
-INSERT INTO muscles VALUES (7, "Forearms");
-INSERT INTO muscles VALUES (8, "Trapezius");
-INSERT INTO muscles VALUES (9, "Latissimus Dorsi");
-INSERT INTO muscles VALUES (10, "Pectoral");
+INSERT INTO muscles VALUES (1, "Legs", "Calves");
+INSERT INTO muscles VALUES (2, "Legs", "Hamstrings");
+INSERT INTO muscles VALUES (3, "Legs", "Quadriceps");
+INSERT INTO muscles VALUES (4, "Legs", "Glutes");
+INSERT INTO muscles VALUES (5, "Arms", "Biceps");
+INSERT INTO muscles VALUES (6, "Arms", "Triceps");
+INSERT INTO muscles VALUES (7, "Arms", "Forearms");
+INSERT INTO muscles VALUES (8, "Shoulders", "Trapezius");
+INSERT INTO muscles VALUES (9, "Back", "Latissimus Dorsi");
+INSERT INTO muscles VALUES (10, "Chest", "Pectoral");
 
 INSERT INTO worked_muscles VALUES (1, 3);
 INSERT INTO worked_muscles VALUES (2, 6);

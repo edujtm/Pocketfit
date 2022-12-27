@@ -3,22 +3,24 @@
     android:id="@+id/execise_item_container"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="100dp"
+    android:paddingVertical="12dp"
+    android:paddingHorizontal="32dp"
     android:orientation="vertical"
-    android:gravity="center"
     >
     <TextView
         android:id="@+id/exercise_item_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
         android:textStyle="bold"
+        android:paddingBottom="4dp"
         android:gravity="center"
     />
 
-    <TextView
-        android:id="@+id/exercise_worked_muscles"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/musclesChipGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        />
+        android:layout_height="wrap_content" />
 </LinearLayout>

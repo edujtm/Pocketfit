@@ -7,6 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import me.edujtm.pocketfit.databinding.FragmentLastWorkoutsBinding
 
 class LastWorkoutsFragment : Fragment() {
@@ -28,10 +31,12 @@ class LastWorkoutsFragment : Fragment() {
         _binding = FragmentLastWorkoutsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        lastWorkoutsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+        val workoutsAdapter = LastWorkoutsListAdapter()
+        with(binding.rvLastWorkouts) {
+            adapter = workoutsAdapter
+            layoutManager = LinearLayoutManager(context)
         }
+
         return root
     }
 
